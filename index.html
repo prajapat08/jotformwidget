@@ -13,11 +13,12 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
   width: 100%; 
 }
  </style>
-
+ 
+<div style="max-width:450px;border:none;width:100%;height:150px" data-width="450" data-height="150">
 <strong class="form-label form-label-top form-label-auto"> All Countries and Cities</strong> 
 <div style="width:100%; display:table; margin-bottom:20px">
 <span style="display:table">Country</span> 
-<select id="selectCountry" style="border: 1px solid #ccc;border-radius: 4px; font-size: 14px;" onchange="myFunction('city',this)">
+<select id="selectCountry" style="border: 1px solid #ccc;border-radius: 4px; font-size: 14px;" onchange="onCountryChange('city',this)">
     <option> </option>
 </select>
 </div>
@@ -79102,6 +79103,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
     <option> </option>
 </select>
 </div>
+</div>
 <script>
        var data = [
         {
@@ -158160,7 +158162,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
           "FIELD3": " "
         }
        ] 
-       function myFunction(divId, element) {
+       function onCountryChange(divId, element) {
         document.getElementById('city').style.display = element.value == 0 ? 'none' : 'block';
        var selectedCountry = document.getElementById("selectCountry").value;
        document.getElementById('selectCity').options.length = 0;
