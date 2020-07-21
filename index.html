@@ -7,16 +7,22 @@
 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-
+<style>
+#city {
+  display: none;
+  width: 100%; 
+}
+ </style>
 
 <strong class="form-label form-label-top form-label-auto"> All Countries and Cities</strong> 
 <div style="width:100%; display:table; margin-bottom:20px">
 <span style="display:table">Country</span> 
-<select id="selectCountry" style="border: 1px solid #ccc;border-radius: 4px; font-size: 14px;" onchange="myFunction()">
-    <option>Select Country</option>
+<select id="selectCountry" style="border: 1px solid #ccc;border-radius: 4px; font-size: 14px;" onchange="myFunction('city',this)">
+    <option> </option>
 </select>
 </div>
 <script>
+  
     var select = document.getElementById("selectCountry");
     var data = [
         {
@@ -79082,28 +79088,18 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
               var countryList = countries.filter(function(item, pos) {
                 return countries.indexOf(item) == pos;
             });
-for(var i = 0; i < countryList.length; i++) {
-    var opt = countryList[i];
-    var el = document.createElement("option");
-    el.textContent = opt;
-    el.value = opt;
-    select.appendChild(el);
-}
-// $("selectCity").find("option").hide();
-if(document.getElementById('selectCity').options.length == 0){
-  $("#city").hide();
-}
+          for(var i = 0; i < countryList.length; i++) {
+              var opt = countryList[i];
+              var el = document.createElement("option");
+              el.textContent = opt;
+              el.value = opt;
+              select.appendChild(el);
+          }
 </script>
-<!-- <style>
-    select.hidden {
-  display: none;
-}
-</style> -->
-<div style="width:100%; display:table">
- 
+<div id = "city" >
 <span style="display:table">City</span>
  <select class="hidden" id="selectCity" style="border: 1px solid #ccc;border-radius: 4px;margin-bottom: 20px; font-size: 14px;">
-    <option>Select City</option>
+    <option> </option>
 </select>
 </div>
 <script>
@@ -158164,22 +158160,18 @@ if(document.getElementById('selectCity').options.length == 0){
           "FIELD3": " "
         }
        ] 
-       function myFunction() {
-       var e = document.getElementById("selectCountry").value;
-    //   var strUser = e.options[e.selectedIndex].text;
-    // document.getElementById("selectCity").selectedIndex = 2;
-    document.getElementById('selectCity').options.length = 0;
-    // document.getElementById("demo").innerHTML = "You selected: " + e;
-    //   var strUser = e.text
-    //   if(strUser){
-
+       function myFunction(divId, element) {
+        document.getElementById('city').style.display = element.value == 0 ? 'none' : 'block';
+       var selectedCountry = document.getElementById("selectCountry").value;
+       document.getElementById('selectCity').options.length = 0;
        var select = document.getElementById("selectCity");
        var cities = data.filter((city) =>{
-        return city.COUNTRY == e.toString();
+        return city.COUNTRY == selectedCountry.toString();
      });
      var cityList = cities.map((cl) =>{
         return cl.CITY; 
      });
+     // generate option for city dropdown 
     for(var i = 0; i < cityList.length; i++) {
     var opt = cityList[i];
     var el = document.createElement("option");
@@ -158187,16 +158179,11 @@ if(document.getElementById('selectCity').options.length == 0){
     el.value = opt;
     select.appendChild(el);
 }
-// var options = document.querySelectorAll('#selectCity option');
-// for (var i = 0, l = options.length; i < l; i++) {
-//     options[i].selected = options[i].defaultSelected;
-// }
+ 
 }
-// }
+
 </script>
-<p id="demo"></p>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
+ 
 </body>
 </html>
