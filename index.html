@@ -158189,12 +158189,14 @@ JFCustomWidget.subscribe("ready", function(){
                 document.getElementById('allCountryCityLable').innerHTML = label;
                 //subscribe to form submit event
                 JFCustomWidget.subscribe("submit", function(){
+                    var submitData = { 
+                    "county" : document.getElementById('selectCountry').value,
+                    "city" : document.getElementById('selectCity').value }
                     var msg = {
                         //you should valid attribute to data for JotForm
                         //to be able to use youw widget as required
                          
-                        value: document.getElementById('selectCountry').value,
-                        value: document.getElementById('selectCity').value 
+                        value: submitData
                     }
                     // send value to JotForm
                     JFCustomWidget.sendSubmit(msg);
