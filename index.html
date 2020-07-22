@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -15,7 +16,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
  </style>
  
 <div style="max-width:450px;border:none;width:100%;height:150px" data-width="450" data-height="150">
-<strong class="form-label form-label-top form-label-auto"> All Countries and Cities</strong> 
+<strong id = "allCountryCityLable" class="form-label form-label-top form-label-auto"> All Countries and Cities</strong> 
 <div style="width:100%; display:table; margin-bottom:20px">
 <span style="display:table">Country</span> 
 <select id="selectCountry" style="border: 1px solid #ccc;border-radius: 4px; font-size: 14px;" onchange="onCountryChange('city',this)">
@@ -158183,6 +158184,22 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 }
  
 }
+JFCustomWidget.subscribe("ready", function(){
+                var label = JFCustomWidget.getWidgetSetting('QuestionLabel');
+                document.getElementById('allCountryCityLable').innerHTML = label;
+                //subscribe to form submit event
+                JFCustomWidget.subscribe("submit", function(){
+                    var msg = {
+                        //you should valid attribute to data for JotForm
+                        //to be able to use youw widget as required
+                         
+                        value: document.getElementById('selectCountry').value,
+                        value: document.getElementById('selectCity').value 
+                    }
+                    // send value to JotForm
+                    JFCustomWidget.sendSubmit(msg);
+                });
+            });
 
 </script>
  
